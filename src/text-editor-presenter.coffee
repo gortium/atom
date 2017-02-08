@@ -12,6 +12,11 @@ class TextEditorPresenter
   overlayDimensions: null
   minimumReflowInterval: 200
 
+  scrollTop: 0
+  scrollLeft: 0
+  realScrollTop: 0
+  realScrollLeft: 0
+
   constructor: (params) ->
     {@model, @lineTopIndex} = params
     @model.presenter = this
@@ -252,6 +257,7 @@ class TextEditorPresenter
     if @boundingClientRect?
       @sharedGutterStyles.maxHeight = @boundingClientRect.height
       @state.content.maxHeight = @boundingClientRect.height
+      @state.content.height = @contentHeight
 
     contentFrameWidth = @contentFrameWidth ? 0
     contentWidth = @contentWidth ? 0
@@ -266,10 +272,14 @@ class TextEditorPresenter
     row - (row % @tileSize)
 
   getStartTileRow: ->
-    @tileForRow(@startRow ? 0)
+    # return 0
+    # @tileForRow(@startRow ? 0)
+    @tileForRow(Math.max(0, @startRow ? 0 - 30))
 
   getEndTileRow: ->
-    @tileForRow(@endRow ? 0)
+    # @tileForRow(@model.getLastScreenRow())
+    # @tileForRow(@endRow ? 0)
+    @tileForRow(Math.min(@endRow ? 0 + 30, @model.getLastScreenRow()))
 
   getScreenRowsToRender: ->
     startRow = @getStartTileRow()

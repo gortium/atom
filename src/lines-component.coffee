@@ -22,12 +22,13 @@ class LinesComponent extends TiledComponent
   constructor: ({@views, @presenter, @domElementPool, @assert}) ->
     @domNode = document.createElement('div')
     @domNode.classList.add('lines')
-    @tilesNode = document.createElement("div")
-    # Create a new stacking context, so that tiles z-index does not interfere
-    # with other visual elements.
-    @tilesNode.style.isolation = "isolate"
-    @tilesNode.style.zIndex = 0
-    @domNode.appendChild(@tilesNode)
+    @tilesNode = @domNode
+    # @tilesNode = document.createElement("div")
+    # # Create a new stacking context, so that tiles z-index does not interfere
+    # # with other visual elements.
+    # @tilesNode.style.isolation = "isolate"
+    # @tilesNode.style.zIndex = 0
+    # @domNode.appendChild(@tilesNode)
 
     @cursorsComponent = new CursorsComponent
     @domNode.appendChild(@cursorsComponent.getDomNode())
@@ -39,9 +40,9 @@ class LinesComponent extends TiledComponent
     @newState.continuousReflow
 
   beforeUpdateSync: (state) ->
-    if @newState.maxHeight isnt @oldState.maxHeight
-      @domNode.style.height = @newState.maxHeight + 'px'
-      @oldState.maxHeight = @newState.maxHeight
+    if @newState.height isnt @oldState.height
+      @domNode.style.height = @newState.height + 'px'
+      @oldState.height = @newState.height
 
     if @newState.backgroundColor isnt @oldState.backgroundColor
       @domNode.style.backgroundColor = @newState.backgroundColor

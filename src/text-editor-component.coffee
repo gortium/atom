@@ -107,9 +107,6 @@ class TextEditorComponent
     @gutterContainerComponent?.destroy()
     @domElementPool.clear()
 
-    @verticalScrollbarComponent.destroy()
-    @horizontalScrollbarComponent.destroy()
-
     @onVerticalScroll = null
     @onHorizontalScroll = null
 
@@ -231,7 +228,7 @@ class TextEditorComponent
     @disposables.add @editor.observeGrammar(@onGrammarChanged)
 
   listenForDOMEvents: ->
-    @domNode.addEventListener 'mousewheel', @onMouseWheel
+    # @domNode.addEventListener 'mousewheel', @onMouseWheel
     @domNode.addEventListener 'textInput', @onTextInput
     @scrollViewNode.addEventListener 'mousedown', @onMouseDown
     @scrollViewNode.addEventListener 'scroll', @onScrollViewScroll

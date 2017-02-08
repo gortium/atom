@@ -65,7 +65,9 @@ module.exports = class LinesTileComponent {
     }
 
     if (this.newTileState.top !== this.oldTileState.top || this.newTileState.left !== this.oldTileState.left) {
-      this.domNode.style.transform = `translate3d(${this.newTileState.left}px, ${this.newTileState.top}px, 0px)`
+      // this.domNode.style.transform = `translate3d(${this.newTileState.left}px, ${this.newTileState.top}px, 0px)`
+      this.domNode.style.left = `${this.newTileState.left}px`
+      this.domNode.style.top = `${this.newTileState.top}px`
       this.oldTileState.top = this.newTileState.top
       this.oldTileState.left = this.newTileState.left
     }
